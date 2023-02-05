@@ -30,14 +30,16 @@ function emptyTable() {
 function mailList() {
   // Call Web API to get a list of mail
   $.ajax({
-    url: "/api/mail/",
+    url: "/api/mails",
     type: "GET",
     dataType: "json",
     success: function (mails) {
       mailListSuccess(mails);
     },
     error: function (request, message, error) {
-      handleException(request, message, error);
+      $("#alert-box").show("slow");
+      $("#alert-box").html("Error: " + error);
+      $("#alert-box").removeClass("success").addClass("error");
     }
   });
 }
