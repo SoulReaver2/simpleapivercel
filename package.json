@@ -1,0 +1,31 @@
+{
+  "name": "verceltest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoulReaver2/verceltest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoulReaver2/verceltest/issues"
+  },
+  "homepage": "https://github.com/SoulReaver2/verceltest#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "lambda-rate-limiter": "^3.0.1",
+    "mongodb": "^4.13.0"
+  }
+}

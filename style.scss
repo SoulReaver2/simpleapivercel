@@ -1,0 +1,253 @@
+$font-path: "./fonts/";
+
+@mixin font-face($font-name, $font-path) {
+  @font-face {
+    font-family: $font-name;
+    src: url($font-path + $font-name + ".otf"),
+      url($font-path + $font-name + ".ttf") format("truetype"),
+      url($font-path + $font-name + ".woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+@include font-face("Mija", $font-path);
+$font-primary: "Mija", sans-serif;
+
+$primary-color: #009879;
+$secondary-color: #e96e50;
+
+/* Normalize
+--------------------------------------------- */
+@import "sass/generic/normalize";
+
+/* Box sizing
+--------------------------------------------- */
+@import "sass/generic/box-sizing";
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-size: 1rem;
+  font-family: $font-primary;
+  line-height: 1.5;
+}
+
+/*****************base rules********************/
+a {
+  color: $primary-color;
+  text-decoration: none;
+}
+a:focus,
+a:hover {
+  color: $primary-color;
+  text-decoration: underline;
+}
+
+/*******************General stuff************************/
+.wrapper {
+  max-width: 60rem;
+  margin: auto;
+}
+
+/*******************header************************/
+.topic {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-title {
+  margin: 0;
+  padding-top: 0.8rem;
+  padding-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.nav {
+  margin-left: auto;
+}
+
+.breadcrumb li {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.breadcrumb li + li::before {
+  content: "/\A0";
+  padding: 0 5px;
+  color: #ccc;
+}
+
+/*******************hero************************/
+.hero {
+  margin-bottom: 3rem;
+  .lead {
+    margin-bottom: 0.7rem;
+  }
+}
+
+.lead {
+  margin-top: 0;
+  font-size: 1.1rem;
+  font-weight: 200;
+}
+
+/*******************alert box************************/
+.alert-box {
+  display: none;
+  border: 1px solid;
+  border-radius: 0.7rem;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.success {
+  border-color: green;
+  color: green;
+  background-color: #90ee90;
+}
+.error {
+  border-color: crimson;
+  color: crimson;
+  background-color: lighten(crimson, 45%);
+}
+
+/*******************styling the add form***********************/
+.new-entry-block {
+  margin-bottom: 3rem;
+  h3 {
+    margin-bottom: 10px;
+  }
+}
+
+#add-entry-form {
+  display: none;
+}
+
+.input-elem {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #fcfcfc;
+  padding: 10px 20px;
+  box-shadow: inset 0 1px 3px #ddd;
+}
+.email {
+  width: 20rem;
+}
+textarea {
+  width: 25rem;
+  height: 100px;
+  resize: none;
+}
+
+.button {
+  background-color: $primary-color;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 35px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: 200ms ease-in;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+/******************* list of entries ************************/
+.lists-hearder {
+  display: flex;
+  align-items: center;
+  a {
+    margin-left: auto;
+  }
+}
+
+table.styled-table {
+  border-radius: 0px;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.styled-table thead tr {
+  background-color: $primary-color;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: thin solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid $primary-color;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: $primary-color;
+}
+
+/********************Delete button**********************/
+.td-del {
+  a {
+    color: rgb(177, 3, 3);
+  }
+}
+
+.gg-remove {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(1.1);
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 22px;
+}
+.gg-remove::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 5px;
+  top: 8px;
+  left: 4px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./jquery-3.6.3.min.js"></script>
+    <script src="./data.js"></script>
+    <title>Documentation</title>
+  </head>
+  <body>
+    <header class="topic">
+      <div class="wrapper">
+        <nav class="nav-bar">
+          <h2 class="nav-title">SimpleApi</h2>
+          <ul class="nav breadcrumb">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/documentation">Documentation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrapper">
+        <div class="hero">
+          <p class="lead">
+            SimpleAPI is a basic API using Vercel cloud functions to receive
+            email, source, userAgent, timestamp via POST and store on mongo
+            atlas.
+          </p>
+          <p class="lead">
+            You must suscribe and get your bearer token to use the premium
+            version of the API.
+          </p>
+          <p class="lead">
+            That said, you can still test API and have fun. By default, you are
+            logged in as
+            <i>guest</i> and use the following bearer token <i>token</i>.
+          </p>
+          <p class="lead">
+            As a guest user, you are limiting to 10 calls by minute, but you can
+            tests all the API capabilities: add, delete and export as CSV . For
+            heavier usage, please log in with a premium account.
+          </p>
+          <p class="lead"></p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

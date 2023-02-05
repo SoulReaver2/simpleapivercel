@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./jquery-3.6.3.min.js"></script>
+    <script src="./data.js"></script>
+    <title>Home</title>
+  </head>
+  <body>
+    <header class="topic">
+      <div class="wrapper">
+        <nav class="nav-bar">
+          <h2 class="nav-title">SimpleApi</h2>
+          <ul class="nav breadcrumb">
+            <li class="nav-link"><a id="nl-1" href="">Home</a></li>
+            <li class="nav-link">
+              <a id="nl-2" href="./docs.html">Documentation</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrapper">
+        <div class="hero">
+          <p class="lead">
+            SimpleAPI is a basic API using Vercel cloud functions to receive
+            email, source, userAgent, timestamp via POST and store on mongo
+            atlas.
+          </p>
+          <p class="lead">
+            On this page, you have a basic html client to interact with the API.
+            you add, delete, and get the list of all entries
+          </p>
+          <p class="lead">
+            If you want to use the API with a tool like Postman, etc ..., please
+            read the documentation
+            <a href="/docs.html">here</a>. For more functionality, please
+            consider our premium package.
+          </p>
+        </div>
+
+        <div id="alert-box" class="alert-box"></div>
+
+        <div class="new-entry-block">
+          <button id="toggle-add" href="" class="button">
+            Add a new entry
+          </button>
+          <form id="add-entry-form" action="" class="decor">
+            <input
+              class="input-elem email"
+              type="email"
+              id="email"
+              name="source"
+              placeholder="Email"
+            /><br /><br />
+            <textarea
+              class="input-elem"
+              name="email"
+              placeholder="Message..."
+              rows="3"
+            ></textarea
+            ><br /><br />
+            <input class="button submit" type="submit" value="Submit" />
+          </form>
+        </div>
+
+        <div class="lists-hearder">
+          <h2>List Of Emails Entries</h2>
+          <a href="#" class="button">Download all Entries as CSV</a>
+        </div>
+        <div id="app"></div>
+      </div>
+    </main>
+
+    <script src="./client.js"></script>
+    <script src="./nav.js"></script>
+  </body>
+</html>
