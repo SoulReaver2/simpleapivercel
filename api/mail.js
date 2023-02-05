@@ -1,5 +1,5 @@
 import { connectToDatabase } from "../lib/mongodb.js";
-import { Joi } from "joi";
+const Joi = require("joi"); //import { Joi } from "joi";
 import { apisecuritycheck } from "../lib/apisecuritycheck.js";
 import { extractmail } from "../lib/extractbody.js";
 
