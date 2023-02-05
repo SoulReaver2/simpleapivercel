@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../lib/mongodb.js";
 const Joi = require("joi"); //import { Joi } from "joi";
 import { apisecuritycheck } from "../lib/apisecuritycheck.js";
-import { extractmail } from "../lib/extractbody.js";
+import { extractmail } from "../lib/extractmail.js";
 
 export default async function hello(request, response) {
   if (request.method != "POST" && request.method != "DELETE") {
