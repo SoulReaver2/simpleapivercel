@@ -110,7 +110,7 @@ $(document).ready(function () {
     event.preventDefault();
     var datajson = convertFormToJSON($(this));
     $.ajax({
-      url: "/api/sex",
+      url: "/api/mail",
       type: "POST",
       data: datajson,
       dataType: "json",
