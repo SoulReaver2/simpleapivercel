@@ -8,7 +8,7 @@ export default async function handler(request, response) {
     sort: { timestamp: -1 }
   };
 
-  const results = await collection.find(options).toArray();
+  const results = await collection.find().sort(options).toArray();
 
   response.status(200).json(results);
 }
