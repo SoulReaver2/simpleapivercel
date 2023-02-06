@@ -40,11 +40,7 @@ function mailList() {
         $("#app").html(emptyTable());
       }
     },
-    error: function (request, message, error) {
-      $("#alert-box").show("slow");
-      $("#alert-box").html("Error: " + error);
-      $("#alert-box").removeClass("success").addClass("error");
-    }
+    error: handleError
   });
 }
 
@@ -104,8 +100,8 @@ $(document).ready(function () {
 
   mailList();
 
-  $(".del-button").each(function () {
-    $(this).click(function (e) {
+  $(".del-button").each(function (index, el) {
+    $(this).on("click", function () {
       const id = $(this).data("id");
       $.ajax({
         url: "/api/mail?id=" + id,
@@ -130,11 +126,7 @@ $(document).ready(function () {
             location = window.location.origin;
           }, 1500);
         },
-        error: function (request, message, error) {
-          $("#alert-box").show("slow");
-          $("#alert-box").html("Error: " + error);
-          $("#alert-box").removeClass("success").addClass("error");
-        }
+        error: handleError
       });
     });
   });
