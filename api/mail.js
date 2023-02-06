@@ -12,8 +12,21 @@ export default async function hello(request, response) {
     return;
   }
 
-  await apisecuritycheck(request, response);
-  datavalidation(request, response);
+  const security = apisecuritycheck(request, response);
+  if (security.status === false) {
+    response.status(security.code).json({
+      error: security.message
+    });
+    return;
+  }
+
+  const validation = datavalidation(request, response);
+  if (validation.status === false) {
+    response.status(400).json({
+      error: validation.message
+    });
+    return;
+  }
 
   if (request.method == "POST") {
     let newMail = extractmail(request);

@@ -148,7 +148,7 @@ $(document).ready(function () {
           success: function (data) {
             $("#alert-box").show("slow");
             $("#alert-box").html(
-              "Entry successfully deleted. total: " + data.deletedCount
+              "Entry successfully deleted. total: " + data.total
             );
             $("#alert-box").removeClass("error").addClass("success");
             $("html, body").animate(
