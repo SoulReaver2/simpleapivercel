@@ -500,7 +500,8 @@ textarea {
   display: flex;
   align-items: center;
 }
-.lists-hearder a {
+.lists-hearder a,
+.lists-hearder button {
   margin-left: auto;
 }
 
