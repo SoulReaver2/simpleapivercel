@@ -79,7 +79,9 @@ function mailBuildTableRow(mail, i) {
     date.toLocaleString() +
     "</td>" +
     "<td class='td-del'>" +
-    "<a href='javascript:;' class='icon-button' aria-label='Icon-only Button'>" +
+    "<a href='javascript:;' class='del-button icon-button' data-id='" +
+    mail._id +
+    "' aria-label='Icon-only Button'>" +
     "<i class='gg-remove'></i>";
   "</a>" + "</td>" + "</tr>";
   return ret;
@@ -96,11 +98,38 @@ function handleException(request, message, error) {
 }
 
 $(document).ready(function () {
-  secret =
+  var secret =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZ3Vlc3QiLCJpYXQiOjE2NzU2MTI3MjZ9.TusyJyuOsu9b2wT0M1SAvr4If8BJgEOPnCiUIBxAupc";
   localStorage.setItem("simpleAPItoken", secret);
 
   mailList();
+
+  $(".del-button").click(function (e) {
+    const id = $(this).data("id");
+    $.ajax({
+      url: "/api/mail?id=" + id,
+      type: "DELETE",
+      dataType: "json",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
+      },
+      success: function (data) {
+        $("#alert-box").show("slow");
+        $("#alert-box").html(
+          "Entry successfully deleted. total: " + data.deletedCount
+        );
+        $("#alert-box").removeClass("error").addClass("success");
+        setTimeout(function () {
+          location = window.location.origin;
+        }, 1500);
+      },
+      error: function (request, message, error) {
+        $("#alert-box").show("slow");
+        $("#alert-box").html("Error: " + error);
+        $("#alert-box").removeClass("success").addClass("error");
+      }
+    });
+  });
 
   $("#toggle-add").click(function () {
     $("#add-entry-form").toggle("slow");
@@ -122,11 +151,7 @@ $(document).ready(function () {
         $("#alert-box").html("Entry successfully added with id: " + data.id);
         $("#alert-box").removeClass("error").addClass("success");
       },
-      error: function (req, status, error) {
-        $("#alert-box").show("slow");
-        $("#alert-box").html("Error: " + error);
-        $("#alert-box").removeClass("success").addClass("error");
-      }
+      error: handleError
     });
   });
 });
@@ -138,4 +163,10 @@ function convertFormToJSON(form) {
       json[name] = value;
       return json;
     }, {});
+}
+
+function handleError(request, status, error) {
+  $("#alert-box").show("slow");
+  $("#alert-box").html("Error: " + error);
+  $("#alert-box").removeClass("success").addClass("error");
 }

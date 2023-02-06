@@ -1,7 +1,6 @@
 import { connectToDatabase } from "../lib/mongodb.js";
-import Joi from "joi";
-//const Joi = require("joi"); //import { Joi } from "joi";
 import { apisecuritycheck } from "../lib/apisecuritycheck.js";
+import { datavalidation } from "../lib/datavalidation.js";
 import { extractmail } from "../lib/extractmail.js";
 
 export default async function hello(request, response) {
@@ -12,28 +11,34 @@ export default async function hello(request, response) {
   }
 
   await apisecuritycheck(request, response);
+  datavalidation(request);
 
-  const schema = Joi.object({
-    mail: Joi.string().min(5).required(),
-    source: Joi.string().email({ minDomainSegments: 2 }).required(),
-    userAgent: Joi.string(),
-    timestamp: Joi.number()
-  });
-  const result = schema.validate(request.body);
-  if (result.error) {
-    response.status(400).send(result.error.details[0].message);
-    return;
+  if (request.method == "POST") {
+    let newMail = extractmail(request);
+    try {
+      const { database } = await connectToDatabase();
+      const collection = database.collection(process.env.NEXT_ATLAS_COLLECTION);
+      const out = await collection.insertOne(newMail);
+      response.status(200).json({ id: out.insertedId });
+    } catch (error) {
+      response.status(400).json({
+        error: "Unable to process the request! Internal server error!"
+      });
+    }
   }
 
-  let newMail = extractmail(request);
-  try {
-    const { database } = await connectToDatabase();
-    const collection = database.collection(process.env.NEXT_ATLAS_COLLECTION);
-    const out = await collection.insertOne(newMail);
-    response.status(200).json({ id: out.insertedId });
-  } catch (error) {
-    response.status(400).json({
-      error: "Unable to process the request! Internal server error!"
-    });
+  if (request.method == "DELETE") {
+    const id = request.query.id;
+    let item = { _id: ObjectId(id) };
+    try {
+      const { database } = await connectToDatabase();
+      const collection = database.collection(process.env.NEXT_ATLAS_COLLECTION);
+      const out = await collection.deleteOne(item);
+      response.status(200).json({ total: out.deletedCount });
+    } catch (error) {
+      response.status(400).json({
+        error: "Unable to process the request! Internal server error!"
+      });
+    }
   }
 }
