@@ -32,9 +32,9 @@ export default async function hello(request, response) {
 
   if (request.method == "DELETE") {
     const id = request.query.id;
-    const objectId = new ObjectId(id);
-    let item = { _id: objectId };
     try {
+      const objectId = new ObjectId(id);
+      let item = { _id: objectId };
       const { database } = await connectToDatabase();
       const collection = database.collection(process.env.NEXT_ATLAS_COLLECTION);
       const out = await collection.deleteOne(item);

@@ -43,7 +43,6 @@ a {
 }
 a:focus,
 a:hover {
-  color: $primary-color;
   text-decoration: underline;
 }
 
@@ -251,4 +250,27 @@ table.styled-table {
   border-radius: 5px;
   top: 8px;
   left: 4px;
+}
+
+/*************************Docs page ****************************/
+.text-code-block {
+  margin-top: 1.5rem;
+}
+
+.main-text-code {
+  margin-top: 0.5rem;
+  margin-bottom: 25px;
+  background-color: #272822;
+  color: #fff;
+  display: block;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  overflow: auto;
+}
+
+.highlight {
+  font-style: italic;
+  color: darken($primary-color, 10%);
+  text-decoration: underline;
 }

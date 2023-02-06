@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="./jquery-3.6.3.min.js"></script>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./icons/favicon.ico"
+    />
     <title>Home</title>
   </head>
   <body>
@@ -14,9 +20,9 @@
         <nav class="nav-bar">
           <h2 class="nav-title">SimpleApi</h2>
           <ul class="nav breadcrumb">
-            <li class="nav-link"><a id="nl-1" href="">Home</a></li>
+            <li class="nav-link"><a id="nl-1" href="/">Home</a></li>
             <li class="nav-link">
-              <a id="nl-2" href="./docs.html">Documentation</a>
+              <a id="nl-2" href="/docs.html">Documentation</a>
             </li>
           </ul>
         </nav>
@@ -73,15 +79,11 @@
           <a id="csv-link" href="#" class="button">
             Download all Entries as CSV
           </a>
-          <!--button class="button" onClick="{() => csvDownload(allmails)}">
-            Download all Entries as CSV
-          </button-->
         </div>
         <div id="app"></div>
       </div>
     </main>
 
     <script src="./client.js"></script>
-    <script src="./nav.js"></script>
   </body>
 </html>

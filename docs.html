@@ -5,8 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="./jquery-3.6.3.min.js"></script>
-    <script src="./data.js"></script>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./icons/favicon.ico"
+    />
     <title>Documentation</title>
   </head>
   <body>
@@ -16,7 +20,7 @@
           <h2 class="nav-title">SimpleApi</h2>
           <ul class="nav breadcrumb">
             <li class="nav-link"><a href="/">Home</a></li>
-            <li class="nav-link"><a href="/documentation">Documentation</a></li>
+            <li class="nav-link"><a href="/docs.html">Documentation</a></li>
           </ul>
         </nav>
       </div>
@@ -35,16 +39,55 @@
             version of the API.
           </p>
           <p class="lead">
-            That said, you can still test API and have fun. By default, you are
-            logged in as
-            <i>guest</i> and use the following bearer token <i>token</i>.
+            That said, you can still test our simpleAPI and have fun. By
+            default, you are logged in as
+            <span class="highlight">guest</span> and use the bearer token
+            provided below.
           </p>
           <p class="lead">
-            As a guest user, you are limiting to 10 calls by minute, but you can
+            As a guest user, you are limited to
+            <span class="highlight">1 call every 30 seconds</span>, but you can
             tests all the API capabilities: add, delete and export as CSV . For
             heavier usage, please log in with a premium account.
           </p>
-          <p class="lead"></p>
+          <div class="text-code-block">
+            <div class="header-text-code">
+              To interact with the API as a guest user, use the following JWT
+              bearer token:
+            </div>
+            <div class="main-text-code">
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZ3Vlc3QiLCJpYXQiOjE2NzU2MTI3MjZ9.TusyJyuOsu9b2wT0M1SAvr4If8BJgEOPnCiUIBxAupc
+            </div>
+          </div>
+          <div class="text-code-block">
+            <div class="header-text-code">
+              There are three (3) availables endpoints
+            </div>
+          </div>
+          <div class="text-code-block">
+            <div class="header-text-code">
+              Add a new entry(requires security token):
+            </div>
+            <div class="main-text-code">
+              <code> POST /api/mail </code>
+            </div>
+          </div>
+          <div class="text-code-block">
+            <div class="header-text-code">
+              Delete an entry(requires security token):
+            </div>
+            <div class="main-text-code">
+              <code> DELETE /api/mail?id=id </code>
+            </div>
+          </div>
+          <div class="text-code-block">
+            <div class="header-text-code">
+              Get all available entries(doesn't requires security token):
+            </div>
+            <div class="main-text-code">
+              <code> POST /api/mails or GET /api/mails </code>
+            </div>
+          </div>
         </div>
       </div>
     </main>

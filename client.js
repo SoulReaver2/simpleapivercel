@@ -134,36 +134,38 @@ $(document).ready(function () {
     });
   });
 
-  $(".del-button").each(function (index, el) {
-    $(this).on("click", function () {
-      const id = $(this).data("id");
-      $.ajax({
-        url: "/api/mail?id=" + id,
-        type: "DELETE",
-        dataType: "json",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
-        },
-        success: function (data) {
-          $("#alert-box").show("slow");
-          $("#alert-box").html(
-            "Entry successfully deleted. total: " + data.deletedCount
-          );
-          $("#alert-box").removeClass("error").addClass("success");
-          $("html, body").animate(
-            {
-              scrollTop: $("#alert-box").offset().top
-            },
-            1000
-          );
-          setTimeout(function () {
-            location = window.location.origin;
-          }, 1500);
-        },
-        error: handleError
+  setTimeout(function () {
+    $(".del-button").each(function (index, el) {
+      $(this).on("click", function () {
+        const id = $(this).data("id");
+        $.ajax({
+          url: "/api/mail?id=" + id,
+          type: "DELETE",
+          dataType: "json",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
+          },
+          success: function (data) {
+            $("#alert-box").show("slow");
+            $("#alert-box").html(
+              "Entry successfully deleted. total: " + data.deletedCount
+            );
+            $("#alert-box").removeClass("error").addClass("success");
+            $("html, body").animate(
+              {
+                scrollTop: $("#alert-box").offset().top
+              },
+              1000
+            );
+            setTimeout(function () {
+              location = window.location.origin;
+            }, 1500);
+          },
+          error: handleError
+        });
       });
     });
-  });
+  }, 3000);
 });
 
 function convertFormToJSON(form) {
@@ -196,9 +198,11 @@ function jsonCsvExport(data) {
     data.map((row) => keys.map((key) => row[key]).join(",")).join("\n")
   ].join("\n");
 
-  const csvBlob = new Blob([commaSeparatedString]);
+  var contentType = "text/csv";
+  const csvBlob = new Blob([commaSeparatedString], { type: contentType });
 
   const a = document.getElementById("csv-link");
-
+  a.download = "all-mails-data.csv";
   a.href = URL.createObjectURL(csvBlob);
+  a.dataset.downloadurl = [contentType, a.download, a.href].join(":");
 }
