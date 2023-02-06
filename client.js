@@ -1,5 +1,3 @@
-var allmails = {};
-
 function initiateTable() {
   let ret =
     "<table id='mail-table' class='styled-table'>" +
@@ -41,7 +39,7 @@ function mailList() {
       } else {
         $("#app").html(emptyTable());
       }
-      allmails = mails;
+      jsonCsvExport(mails);
     },
     error: handleError
   });
@@ -187,4 +185,20 @@ function handleError(request, status, error) {
     },
     1000
   );
+}
+
+function jsonCsvExport(data) {
+  // get keys as array
+  const keys = Object.keys(data[0]);
+
+  const commaSeparatedString = [
+    keys.join(","),
+    data.map((row) => keys.map((key) => row[key]).join(",")).join("\n")
+  ].join("\n");
+
+  const csvBlob = new Blob([commaSeparatedString]);
+
+  const a = document.getElementById("csv-link");
+
+  a.href = URL.createObjectURL(csvBlob);
 }
