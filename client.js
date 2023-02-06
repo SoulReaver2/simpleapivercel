@@ -179,7 +179,13 @@ function convertFormToJSON(form) {
 
 function handleError(request, status, error) {
   $("#alert-box").show("slow");
-  $("#alert-box").html("Error: " + error);
+  var err;
+  if (request.responseJSON) {
+    err = request.responseJSON.error;
+  } else {
+    err = error;
+  }
+  $("#alert-box").html("Error: " + err);
   $("#alert-box").removeClass("success").addClass("error");
   $("html, body").animate(
     {
