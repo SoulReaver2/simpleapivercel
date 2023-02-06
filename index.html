@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="./jquery-3.6.3.min.js"></script>
+    <script src="./json-to-csv-export.js"></script>
     <title>Home</title>
   </head>
   <body>
@@ -70,7 +71,9 @@
 
         <div class="lists-hearder">
           <h2>List Of Emails Entries</h2>
-          <a href="#" class="button">Download all Entries as CSV</a>
+          <button class="button" onClick="{() => csvDownload(allmails)}">
+            Download all Entries as CSV
+          </button>
         </div>
         <div id="app"></div>
       </div>

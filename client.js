@@ -1,3 +1,5 @@
+var allmails = {};
+
 function initiateTable() {
   let ret =
     "<table id='mail-table' class='styled-table'>" +
@@ -39,6 +41,7 @@ function mailList() {
       } else {
         $("#app").html(emptyTable());
       }
+      allmails = mails;
     },
     error: handleError
   });
@@ -100,37 +103,6 @@ $(document).ready(function () {
 
   mailList();
 
-  $(".del-button").each(function (index, el) {
-    $(this).on("click", function () {
-      const id = $(this).data("id");
-      $.ajax({
-        url: "/api/mail?id=" + id,
-        type: "DELETE",
-        dataType: "json",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
-        },
-        success: function (data) {
-          $("#alert-box").show("slow");
-          $("#alert-box").html(
-            "Entry successfully deleted. total: " + data.deletedCount
-          );
-          $("#alert-box").removeClass("error").addClass("success");
-          $("html, body").animate(
-            {
-              scrollTop: $("#alert-box").offset().top
-            },
-            1000
-          );
-          setTimeout(function () {
-            location = window.location.origin;
-          }, 1500);
-        },
-        error: handleError
-      });
-    });
-  });
-
   $("#toggle-add").click(function () {
     $("#add-entry-form").toggle("slow");
   });
@@ -161,6 +133,37 @@ $(document).ready(function () {
         }, 1500);
       },
       error: handleError
+    });
+  });
+
+  $(".del-button").each(function (index, el) {
+    $(this).on("click", function () {
+      const id = $(this).data("id");
+      $.ajax({
+        url: "/api/mail?id=" + id,
+        type: "DELETE",
+        dataType: "json",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
+        },
+        success: function (data) {
+          $("#alert-box").show("slow");
+          $("#alert-box").html(
+            "Entry successfully deleted. total: " + data.deletedCount
+          );
+          $("#alert-box").removeClass("error").addClass("success");
+          $("html, body").animate(
+            {
+              scrollTop: $("#alert-box").offset().top
+            },
+            1000
+          );
+          setTimeout(function () {
+            location = window.location.origin;
+          }, 1500);
+        },
+        error: handleError
+      });
     });
   });
 });
