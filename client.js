@@ -119,6 +119,12 @@ $(document).ready(function () {
           "Entry successfully deleted. total: " + data.deletedCount
         );
         $("#alert-box").removeClass("error").addClass("success");
+        $("html, body").animate(
+          {
+            scrollTop: $("#alert-box").offset().top
+          },
+          1000
+        );
         setTimeout(function () {
           location = window.location.origin;
         }, 1500);
@@ -150,6 +156,15 @@ $(document).ready(function () {
         $("#alert-box").show("slow");
         $("#alert-box").html("Entry successfully added with id: " + data.id);
         $("#alert-box").removeClass("error").addClass("success");
+        $("html, body").animate(
+          {
+            scrollTop: $("#alert-box").offset().top
+          },
+          1000
+        );
+        setTimeout(function () {
+          location = window.location.origin;
+        }, 1500);
       },
       error: handleError
     });

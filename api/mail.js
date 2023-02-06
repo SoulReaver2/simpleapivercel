@@ -11,7 +11,7 @@ export default async function hello(request, response) {
   }
 
   await apisecuritycheck(request, response);
-  datavalidation(request);
+  datavalidation(request, response);
 
   if (request.method == "POST") {
     let newMail = extractmail(request);
