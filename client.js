@@ -28,13 +28,17 @@ function emptyTable() {
 }
 
 function mailList() {
-  // Call Web API to get a list of mail
   $.ajax({
     url: "/api/mails",
     type: "GET",
     dataType: "json",
     success: function (mails) {
-      mailListSuccess(mails);
+      if (mails.length > 0) {
+        $("#app").html(initiateTable());
+        mailListSuccess(mails);
+      } else {
+        $("#app").html(emptyTable());
+      }
     },
     error: function (request, message, error) {
       $("#alert-box").show("slow");
@@ -96,13 +100,7 @@ $(document).ready(function () {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZ3Vlc3QiLCJpYXQiOjE2NzU2MTI3MjZ9.TusyJyuOsu9b2wT0M1SAvr4If8BJgEOPnCiUIBxAupc";
   localStorage.setItem("simpleAPItoken", secret);
 
-  if (mails && mails.length > 0) {
-    $("#app").append(initiateTable());
-    mailListSuccess(mails);
-  } else if (mails && mails.length == 0) {
-    $("#app").append(emptyTable());
-  } else {
-  }
+  mailList();
 
   $("#toggle-add").click(function () {
     $("#add-entry-form").toggle("slow");
