@@ -104,36 +104,38 @@ $(document).ready(function () {
 
   mailList();
 
-  $(".del-button").click(function (e) {
-    const id = $(this).data("id");
-    $.ajax({
-      url: "/api/mail?id=" + id,
-      type: "DELETE",
-      dataType: "json",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
-      },
-      success: function (data) {
-        $("#alert-box").show("slow");
-        $("#alert-box").html(
-          "Entry successfully deleted. total: " + data.deletedCount
-        );
-        $("#alert-box").removeClass("error").addClass("success");
-        $("html, body").animate(
-          {
-            scrollTop: $("#alert-box").offset().top
-          },
-          1000
-        );
-        setTimeout(function () {
-          location = window.location.origin;
-        }, 1500);
-      },
-      error: function (request, message, error) {
-        $("#alert-box").show("slow");
-        $("#alert-box").html("Error: " + error);
-        $("#alert-box").removeClass("success").addClass("error");
-      }
+  $(".del-button").each(function () {
+    $(this).click(function (e) {
+      const id = $(this).data("id");
+      $.ajax({
+        url: "/api/mail?id=" + id,
+        type: "DELETE",
+        dataType: "json",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("simpleAPItoken")
+        },
+        success: function (data) {
+          $("#alert-box").show("slow");
+          $("#alert-box").html(
+            "Entry successfully deleted. total: " + data.deletedCount
+          );
+          $("#alert-box").removeClass("error").addClass("success");
+          $("html, body").animate(
+            {
+              scrollTop: $("#alert-box").offset().top
+            },
+            1000
+          );
+          setTimeout(function () {
+            location = window.location.origin;
+          }, 1500);
+        },
+        error: function (request, message, error) {
+          $("#alert-box").show("slow");
+          $("#alert-box").html("Error: " + error);
+          $("#alert-box").removeClass("success").addClass("error");
+        }
+      });
     });
   });
 
@@ -184,4 +186,10 @@ function handleError(request, status, error) {
   $("#alert-box").show("slow");
   $("#alert-box").html("Error: " + error);
   $("#alert-box").removeClass("success").addClass("error");
+  $("html, body").animate(
+    {
+      scrollTop: $("#alert-box").offset().top
+    },
+    1000
+  );
 }
